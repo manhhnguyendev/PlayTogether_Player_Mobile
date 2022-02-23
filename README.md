@@ -1,6 +1,8 @@
-# playtogether_player
+# PlayTogether_Hirer_Mobile
 
 A new Flutter project.
+
+flutter run --no-sound-null-safety
 
 ## Getting Started
 
