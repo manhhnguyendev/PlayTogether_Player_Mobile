@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:playtogether_player/shared_component/decline_button.dart';
-import 'package:playtogether_player/shared_component/second_main_button.dart';
+import 'package:playtogether_player/widgets/second_main_button.dart';
 
-class EndHiringStage extends StatefulWidget {
+class EndHiringPage extends StatefulWidget {
   static String routeName = 'EngHiring';
-  //const EndHiringStage({ Key? key }) : super(key: key);
+  const EndHiringPage({Key? key}) : super(key: key);
 
   @override
-  _EndHiringStageState createState() => _EndHiringStageState();
+  _EndHiringPageState createState() => _EndHiringPageState();
 }
 
-class _EndHiringStageState extends State<EndHiringStage> {
+class _EndHiringPageState extends State<EndHiringPage> {
   String profileLink = "assets/images/defaultprofile.png";
   String profileLink2 = "assets/images/defaultprofile.png";
   bool isDonate = true;

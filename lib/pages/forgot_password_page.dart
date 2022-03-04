@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:playtogether_player/const.dart';
-import 'package:playtogether_player/screen/change_password_screen/change_password_page.dart';
-import 'package:playtogether_player/shared_component/login_error_form.dart';
-import 'package:playtogether_player/shared_component/main_button.dart';
-import 'package:playtogether_player/shared_component/otp_button.dart';
+import 'package:playtogether_player/constants/const.dart';
+import 'package:playtogether_player/pages/change_password_page.dart';
+import 'package:playtogether_player/widgets/login_error_form.dart';
+import 'package:playtogether_player/widgets/main_button.dart';
+import 'package:playtogether_player/widgets/otp_button.dart';
 
-class ForgotPasswordForm extends StatefulWidget {
-  const ForgotPasswordForm({Key? key}) : super(key: key);
+class ForgotPasswordPage extends StatefulWidget {
+  static String routeName = "forgotPassword";
+  const ForgotPasswordPage({Key? key}) : super(key: key);
 
   @override
-  _ForgotPasswordFormState createState() => _ForgotPasswordFormState();
+  _ForgotPasswordPageState createState() => _ForgotPasswordPageState();
 }
 
-class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
+class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   final _formKey = GlobalKey<FormState>();
   String email = "";
   String otpCode = "";
@@ -38,48 +39,72 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: Column(
-              children: [
-                buildEmailField(),
-                FormError(listError: listErrorEmail),
-                const SizedBox(
-                  height: 10,
-                ),
-                Row(
+    Size size = MediaQuery.of(context).size;
+    return Scaffold(
+      resizeToAvoidBottomInset: true,
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              width: size.width,
+              height: size.height * 0.45,
+              decoration: const BoxDecoration(
+                  color: Colors.white,
+                  image: DecorationImage(
+                      image: AssetImage("assets/images/playtogetherlogo.png"),
+                      fit: BoxFit.cover)),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              child: Form(
+                key: _formKey,
+                child: Column(
                   children: [
-                    Expanded(flex: 2, child: buildOTPField()),
-                    const Expanded(flex: 1, child: OTPButton()),
+                    Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Column(
+                        children: [
+                          buildEmailField(),
+                          FormError(listError: listErrorEmail),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            children: [
+                              Expanded(flex: 2, child: buildOTPField()),
+                              const Expanded(flex: 1, child: OTPButton()),
+                            ],
+                          ),
+                          FormError(listError: listErrorOTP),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                        ],
+                      ),
+                    ),
+                    MainButton(
+                      text: "TIẾP TỤC",
+                      onpress: () {
+                        if (_formKey.currentState == null) {
+                          print("_formKey.currentState is null!");
+                        } else if (_formKey.currentState!.validate()) {
+                          _formKey.currentState!.save();
+                          if (listErrorEmail.length == 1 &&
+                              //vi` luc khai bao 4 cai list , co 1 phan tu "" san trong list nen length = 1;
+                              listErrorOTP.length == 1) {
+                            Navigator.pushNamed(
+                                context, ChangePasswordPage.routeName);
+                          }
+                        }
+                      },
+                    ),
                   ],
                 ),
-                FormError(listError: listErrorOTP),
-                const SizedBox(
-                  height: 10,
-                ),
-              ],
+              ),
             ),
-          ),
-          MainButton(
-            text: "TIẾP TỤC",
-            onpress: () {
-              if (_formKey.currentState == null) {
-                print("_formKey.currentState is null!");
-              } else if (_formKey.currentState!.validate()) {
-                _formKey.currentState!.save();
-                if (listErrorEmail.length == 1 &&
-                    //vi` luc khai bao 4 cai list , co 1 phan tu "" san trong list nen length = 1;
-                    listErrorOTP.length == 1) {
-                  Navigator.pushNamed(context, ChangePasswordPage.routeName);
-                }
-              }
-            },
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

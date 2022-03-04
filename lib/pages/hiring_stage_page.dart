@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:playtogether_player/screen/end_hiring_stage/end_hiring_state_page.dart';
-//import 'package:playtogether_player/screen/rating_comment_player_screen/rating_comment_player_page.dart';
-import 'package:playtogether_player/shared_component/countdown_widget.dart';
-import 'package:playtogether_player/shared_component/decline_button.dart';
-import 'package:playtogether_player/shared_component/second_main_button.dart';
+import 'package:playtogether_player/pages/end_hiring_page.dart';
+import 'package:playtogether_player/widgets/decline_button.dart';
+import 'package:playtogether_player/widgets/second_main_button.dart';
 
 class HiringPage extends StatefulWidget {
   static String routeName = 'HiringStage';
+  const HiringPage({Key? key}) : super(key: key);
 
   @override
   _HiringPageState createState() => _HiringPageState();
@@ -29,7 +28,7 @@ class _HiringPageState extends State<HiringPage> with TickerProviderStateMixin {
     controller.reverse(from: controller.value == 0 ? 1.0 : controller.value);
     controller.addListener(() {
       if (controller.value == 0) {
-        Navigator.pushNamed(context, EndHiringStage.routeName);
+        Navigator.pushNamed(context, EndHiringPage.routeName);
       }
     });
   }

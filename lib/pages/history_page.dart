@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:playtogether_player/model/player_model.dart';
-import 'package:playtogether_player/shared_component/bottom_bar.dart';
+import 'package:playtogether_player/models/player_model.dart';
+import 'package:playtogether_player/widgets/bottom_bar.dart';
 
-class NotificationsPage extends StatefulWidget {
-  final PlayerModel playerModel;
-  NotificationsPage({Key? key, required this.playerModel}) : super(key: key);
+class HistoryPage extends StatefulWidget {
+  HistoryPage({
+    Key? key,
+  }) : super(key: key);
 
   @override
-  _NotificationsPageState createState() => _NotificationsPageState();
+  _HistoryPageState createState() => _HistoryPageState();
 }
 
-class _NotificationsPageState extends State<NotificationsPage> {
+class _HistoryPageState extends State<HistoryPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -21,7 +22,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
           child: AppBar(
             centerTitle: true,
             title: const Text(
-              'Thông báo',
+              'Lịch sử thuê',
               style: TextStyle(
                   fontSize: 20,
                   color: Colors.black,
@@ -43,10 +44,10 @@ class _NotificationsPageState extends State<NotificationsPage> {
             ),
           ),
         ),
-        bottomNavigationBar: BottomBar(
-          playerModel: widget.playerModel,
-          bottomBarIndex: 2,
-        ),
+        // bottomNavigationBar: BottomBar(
+        //   playerModel: widget.playerModel,
+        //   bottomBarIndex: 1,
+        // ),
       ),
     );
   }

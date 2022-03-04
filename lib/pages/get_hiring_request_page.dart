@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:playtogether_player/screen/hiring_stage_screen/hiring_stage_page.dart';
-import 'package:playtogether_player/shared_component/decline_button.dart';
-import 'package:playtogether_player/shared_component/second_main_button.dart';
+import 'package:playtogether_player/pages/hiring_stage_page.dart';
+import 'package:playtogether_player/widgets/decline_button.dart';
+import 'package:playtogether_player/widgets/second_main_button.dart';
 
 class GetHiringRequestPage extends StatefulWidget {
   static String routeName = 'GetHiringRequest';
-  //const GetHiringRequestPage({ Key? key }) : super(key: key);
+  const GetHiringRequestPage({Key? key}) : super(key: key);
 
   @override
   _GetHiringRequestPageState createState() => _GetHiringRequestPageState();

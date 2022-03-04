@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:playtogether_player/helper/helper.dart' as helper;
+import 'package:playtogether_player/helpers/helper.dart' as helper;
 import 'package:playtogether_player/constants/my_color.dart' as my_colors;
-import 'package:playtogether_player/model/hirer_model.dart';
-import 'package:playtogether_player/model/player_model.dart';
-import 'package:playtogether_player/screen/history_screen/history_page.dart';
-import 'package:playtogether_player/screen/home_screen/home_page.dart';
-import 'package:playtogether_player/screen/notification_screen/notification_page.dart';
-import 'package:playtogether_player/model/hirer_model.dart';
-import 'package:playtogether_player/screen/user_account_screen/user_account_page.dart';
+import 'package:playtogether_player/models/hirer_model.dart';
+import 'package:playtogether_player/models/player_model.dart';
+import 'package:playtogether_player/pages/history_page.dart';
+import 'package:playtogether_player/pages/home_page.dart';
+import 'package:playtogether_player/pages/notification_page.dart';
+import 'package:playtogether_player/models/hirer_model.dart';
+import 'package:playtogether_player/pages/user_account_page.dart';
 
 class BottomBar extends StatefulWidget {
   final int bottomBarIndex;
-  final PlayerModel playerModel;
-  BottomBar({Key? key, required this.bottomBarIndex, required this.playerModel})
-      : super(key: key);
+  // final PlayerModel playerModel;
+  BottomBar({Key? key, required this.bottomBarIndex}) : super(key: key);
 
   @override
   _BottomBarState createState() => _BottomBarState();
@@ -59,8 +58,8 @@ class _BottomBarState extends State<BottomBar> {
             helper.pushInto(
               context,
               HomePage(
-                playerModel: widget.playerModel,
-              ),
+                  //playerModel: widget.playerModel,
+                  ),
               isRightToLeft,
             );
           } else if (index == 1) {
@@ -69,8 +68,8 @@ class _BottomBarState extends State<BottomBar> {
             helper.pushInto(
               context,
               HistoryPage(
-                playerModel: widget.playerModel,
-              ),
+                  //playerModel: widget.playerModel,
+                  ),
               isRightToLeft,
             );
             //===================================================================================
@@ -78,14 +77,16 @@ class _BottomBarState extends State<BottomBar> {
             helper.pushInto(
               context,
               NotificationsPage(
-                playerModel: widget.playerModel,
-              ),
+                  //playerModel: widget.playerModel,
+                  ),
               isRightToLeft,
             );
           } else if (index == 3) {
             helper.pushInto(
               context,
-              UserAccountPage(playerModel: widget.playerModel),
+              UserAccountPage(
+                  //playerModel: widget.playerModel,
+                  ),
               isRightToLeft,
             );
           }

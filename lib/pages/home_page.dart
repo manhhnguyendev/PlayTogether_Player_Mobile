@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:playtogether_player/constants/config_json.dart';
-import 'package:playtogether_player/model/player_model.dart';
-import 'package:playtogether_player/shared_component/main_button.dart';
-import 'package:playtogether_player/shared_component/second_main_button.dart';
-import 'package:playtogether_player/shared_component/bottom_bar.dart';
+import 'package:playtogether_player/models/player_model.dart';
+import 'package:playtogether_player/widgets/main_button.dart';
+import 'package:playtogether_player/widgets/second_main_button.dart';
+import 'package:playtogether_player/widgets/bottom_bar.dart';
 
 class HomePage extends StatefulWidget {
   static String routeName = 'HomePage';
-  final PlayerModel playerModel;
-  const HomePage({Key? key, required this.playerModel}) : super(key: key);
+  //final PlayerModel playerModel;
+  const HomePage({Key? key}) : super(key: key);
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -376,10 +376,10 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomBar(
-        playerModel: widget.playerModel,
-        bottomBarIndex: 2,
-      ),
+      // bottomNavigationBar: BottomBar(
+      //   playerModel: widget.playerModel,
+      //   bottomBarIndex: 2,
+      // ),
     );
   }
 
