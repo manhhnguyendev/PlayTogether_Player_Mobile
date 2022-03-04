@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:playtogether_player/const.dart';
-import 'package:playtogether_player/screen/complete_profile_screen/complete_profile_page.dart';
-import 'package:playtogether_player/shared_component/confirm_otp_button.dart';
-import 'package:playtogether_player/shared_component/login_error_form.dart';
-import 'package:playtogether_player/shared_component/main_button.dart';
-import 'package:playtogether_player/shared_component/otp_button.dart';
+import 'package:playtogether_player/constants/const.dart';
+import 'package:playtogether_player/pages/complete_profile_page.dart';
+import 'package:playtogether_player/widgets/confirm_otp_button.dart';
+import 'package:playtogether_player/widgets/login_error_form.dart';
+import 'package:playtogether_player/widgets/main_button.dart';
+import 'package:playtogether_player/widgets/otp_button.dart';
 
-class RegisterForm extends StatefulWidget {
-  const RegisterForm({Key? key}) : super(key: key);
+class RegisterPage extends StatefulWidget {
+  static String routeName = "register";
+  const RegisterPage({Key? key}) : super(key: key);
 
   @override
-  _RegisterFormState createState() => _RegisterFormState();
+  _RegisterPageState createState() => _RegisterPageState();
 }
 
-class _RegisterFormState extends State<RegisterForm> {
+class _RegisterPageState extends State<RegisterPage> {
   final _formKey = GlobalKey<FormState>();
   String email = "";
   String password = "";
@@ -45,65 +46,109 @@ class _RegisterFormState extends State<RegisterForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Expanded(flex: 2, child: buildEmailField()),
-                    const Expanded(flex: 1, child: OTPButton()),
-                  ],
-                ),
-                FormError(listError: listErrorEmail),
-                const SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  children: [
-                    Expanded(flex: 2, child: buildOTPField()),
-                    const Expanded(flex: 1, child: ConfirmOTPButton()),
-                  ],
-                ),
-                FormError(listError: listErrorOTP),
-                const SizedBox(
-                  height: 10,
-                ),
-                buildPasswordField(),
-                FormError(listError: listErrorPass),
-                const SizedBox(
-                  height: 10,
-                ),
-                buildConfirmField(),
-                FormError(listError: listErrorConfirm),
-                const SizedBox(
-                  height: 10,
-                ),
-              ],
+    Size size = MediaQuery.of(context).size;
+    return Scaffold(
+      resizeToAvoidBottomInset: true,
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            Container(
+              width: size.width,
+              height: size.height * 0.45,
+              decoration: const BoxDecoration(
+                  color: Colors.white,
+                  image: DecorationImage(
+                      image: AssetImage("assets/images/playtogetherlogo.png"),
+                      fit: BoxFit.cover)),
             ),
-          ),
-          MainButton(
-            text: "TIẾP TỤC",
-            onpress: () {
-              if (_formKey.currentState == null) {
-                print("_formKey.currentState is null!");
-              } else if (_formKey.currentState!.validate()) {
-                _formKey.currentState!.save();
-                if (listErrorEmail.length ==
-                        1 && //vi` luc khai bao 4 cai list , co 1 phan tu "" san trong list nen length = 1;
-                    listErrorPass.length == 1 &&
-                    listErrorConfirm.length == 1 &&
-                    listErrorOTP.length == 1) {
-                  Navigator.pushNamed(context, CompleteProfilePage.routeName);
-                }
-              }
-            },
-          ),
-        ],
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              Expanded(flex: 2, child: buildEmailField()),
+                              const Expanded(flex: 1, child: OTPButton()),
+                            ],
+                          ),
+                          FormError(listError: listErrorEmail),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            children: [
+                              Expanded(flex: 2, child: buildOTPField()),
+                              const Expanded(
+                                  flex: 1, child: ConfirmOTPButton()),
+                            ],
+                          ),
+                          FormError(listError: listErrorOTP),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          buildPasswordField(),
+                          FormError(listError: listErrorPass),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          buildConfirmField(),
+                          FormError(listError: listErrorConfirm),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                        ],
+                      ),
+                    ),
+                    MainButton(
+                      text: "TIẾP TỤC",
+                      onpress: () {
+                        if (_formKey.currentState == null) {
+                          print("_formKey.currentState is null!");
+                        } else if (_formKey.currentState!.validate()) {
+                          _formKey.currentState!.save();
+                          if (listErrorEmail.length ==
+                                  1 && //vi` luc khai bao 4 cai list , co 1 phan tu "" san trong list nen length = 1;
+                              listErrorPass.length == 1 &&
+                              listErrorConfirm.length == 1 &&
+                              listErrorOTP.length == 1) {
+                            Navigator.pushNamed(
+                                context, CompleteProfilePage.routeName);
+                          }
+                        }
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 15),
+              child: GestureDetector(
+                onTap: () {},
+                child: const Text(
+                  'Bạn đã có tài khoản? Quay lại đăng nhập',
+                  style: TextStyle(
+                    fontSize: 15,
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 40,
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:playtogether_player/const.dart';
-import 'package:playtogether_player/shared_component/login_error_form.dart';
-import 'package:playtogether_player/shared_component/main_button.dart';
-import 'package:playtogether_player/shared_component/main_goback_button.dart';
+import 'package:playtogether_player/constants/const.dart';
+import 'package:playtogether_player/widgets/login_error_form.dart';
+import 'package:playtogether_player/widgets/main_button.dart';
+import 'package:playtogether_player/widgets/main_goback_button.dart';
 
-class CompleteProfileForm extends StatefulWidget {
-  const CompleteProfileForm({Key? key}) : super(key: key);
+class CompleteProfilePage extends StatefulWidget {
+  static String routeName = "complete_profile";
+  const CompleteProfilePage({Key? key}) : super(key: key);
 
   @override
-  _CompleteProfileFormState createState() => _CompleteProfileFormState();
+  _CompleteProfilePageState createState() => _CompleteProfilePageState();
 }
 
-class _CompleteProfileFormState extends State<CompleteProfileForm> {
+class _CompleteProfilePageState extends State<CompleteProfilePage> {
   final _formKey = GlobalKey<FormState>();
   final initialDate = DateTime.now();
   String firstName = "";
@@ -146,125 +147,168 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     loadData();
-    return Form(
-      key: _formKey,
-      child: Column(
-        children: [
+    return Scaffold(
+      resizeToAvoidBottomInset: true,
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView(
+          child: Column(
+        children: <Widget>[
+          Container(
+            width: size.width,
+            height: size.height * 0.45,
+            decoration: const BoxDecoration(
+                color: Colors.white,
+                image: DecorationImage(
+                    image: AssetImage("assets/images/playtogetherlogo.png"),
+                    fit: BoxFit.cover)),
+          ),
           Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: Column(
-              children: <Widget>[
-                Row(
-                  children: [
-                    Expanded(flex: 1, child: buildFirstNameField()),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    Expanded(flex: 1, child: buildLastNameField()),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                        flex: 1,
-                        child: FormError(listError: listErrorFirstName)),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    Expanded(
-                        flex: 1,
-                        child: FormError(listError: listErrorLastName)),
-                  ],
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                      border: Border.all(color: Colors.black),
-                      borderRadius: BorderRadius.circular(5)),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 10.0),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: buildProvinceField(),
-                          flex: 7,
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Column(
+                      children: <Widget>[
+                        Row(
+                          children: [
+                            Expanded(flex: 1, child: buildFirstNameField()),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            Expanded(flex: 1, child: buildLastNameField()),
+                          ],
                         ),
-                        const Expanded(
-                          child: Icon(
-                            Icons.keyboard_arrow_down,
-                            color: Color.fromARGB(220, 100, 100, 100),
-                          ),
-                          flex: 1,
+                        Row(
+                          children: [
+                            Expanded(
+                                flex: 1,
+                                child:
+                                    FormError(listError: listErrorFirstName)),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            Expanded(
+                                flex: 1,
+                                child: FormError(listError: listErrorLastName)),
+                          ],
                         ),
-                      ],
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                buildBirthdayField(),
-                const SizedBox(
-                  height: 20,
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                      border: Border.all(color: Colors.black),
-                      borderRadius: BorderRadius.circular(5)),
-                  child: Padding(
-                    padding: const EdgeInsets.all(0.0),
-                    child: Row(
-                      children: [
-                        const Expanded(
-                          flex: 1,
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.black),
+                              borderRadius: BorderRadius.circular(5)),
                           child: Padding(
-                            padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                            child: Text(
-                              "Giới tính:",
-                              style: TextStyle(
-                                  color: Color.fromARGB(220, 100, 100, 100),
-                                  fontSize: 16),
+                            padding: const EdgeInsets.only(left: 10.0),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: buildProvinceField(),
+                                  flex: 7,
+                                ),
+                                const Expanded(
+                                  child: Icon(
+                                    Icons.keyboard_arrow_down,
+                                    color: Color.fromARGB(220, 100, 100, 100),
+                                  ),
+                                  flex: 1,
+                                ),
+                              ],
                             ),
                           ),
                         ),
-                        Expanded(
-                          flex: 3,
-                          child: Container(
-                              alignment: Alignment.centerLeft,
-                              child: buildGenderSelection()),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        buildBirthdayField(),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.black),
+                              borderRadius: BorderRadius.circular(5)),
+                          child: Padding(
+                            padding: const EdgeInsets.all(0.0),
+                            child: Row(
+                              children: [
+                                const Expanded(
+                                  flex: 1,
+                                  child: Padding(
+                                    padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                    child: Text(
+                                      "Giới tính:",
+                                      style: TextStyle(
+                                          color: Color.fromARGB(
+                                              220, 100, 100, 100),
+                                          fontSize: 16),
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 3,
+                                  child: Container(
+                                      alignment: Alignment.centerLeft,
+                                      child: buildGenderSelection()),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
                         ),
                       ],
                     ),
                   ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-              ],
+                  MainButton(
+                      text: "HOÀN TẤT",
+                      onpress: () {
+                        if (_formKey.currentState == null) {
+                          print("_formKey.currentState is null!");
+                        } else if (_formKey.currentState!.validate()) {
+                          _formKey.currentState!.save();
+                          if (listErrorFirstName.length ==
+                                  1 && //vi` luc khai bao 4 cai list , co 1 phan tu "" san trong list nen length = 1;
+                              listErrorLastName.length == 1 &&
+                              listErrorProvince.length == 1 &&
+                              listErrorBirthday.length == 1) {
+                            print("ALL VALID");
+                          }
+                        }
+                      }),
+                  GoBackButton(text: "QUAY LẠI ", onpress: () {}),
+                ],
+              ),
             ),
           ),
-          MainButton(
-              text: "HOÀN TẤT",
-              onpress: () {
-                if (_formKey.currentState == null) {
-                  print("_formKey.currentState is null!");
-                } else if (_formKey.currentState!.validate()) {
-                  _formKey.currentState!.save();
-                  if (listErrorFirstName.length ==
-                          1 && //vi` luc khai bao 4 cai list , co 1 phan tu "" san trong list nen length = 1;
-                      listErrorLastName.length == 1 &&
-                      listErrorProvince.length == 1 &&
-                      listErrorBirthday.length == 1) {
-                    print("ALL VALID");
-                  }
-                }
-              }),
-          GoBackButton(text: "QUAY LẠI ", onpress: () {}),
+          const SizedBox(
+            height: 10,
+          ),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 15),
+            child: GestureDetector(
+              onTap: () {},
+              child: const Text(
+                'Bạn đã có tài khoản? Quay lại đăng nhập',
+                style: TextStyle(
+                  fontSize: 15,
+                  decoration: TextDecoration.underline,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 40,
+          ),
         ],
-      ),
+      )),
     );
   }
 

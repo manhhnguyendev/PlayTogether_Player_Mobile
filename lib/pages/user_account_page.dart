@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:playtogether_player/model/player_model.dart';
+import 'package:playtogether_player/models/player_model.dart';
 //import 'package:playtogether_player/screen/user_profile_details_srceen/user_profile_details_page.dart';
 
 class UserAccountPage extends StatefulWidget {
   static String routeName = 'UserAccount';
-  final PlayerModel playerModel;
 
-  const UserAccountPage({Key? key, required this.playerModel})
-      : super(key: key);
+  const UserAccountPage({Key? key}) : super(key: key);
   @override
   _UserAccountPageState createState() => _UserAccountPageState();
 }

@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:playtogether_player/const.dart';
-import 'package:playtogether_player/shared_component/login_error_form.dart';
-import 'package:playtogether_player/shared_component/main_button.dart';
+import 'package:playtogether_player/constants/const.dart';
+import 'package:playtogether_player/widgets/login_error_form.dart';
+import 'package:playtogether_player/widgets/main_button.dart';
 
-class ChangePasswordForm extends StatefulWidget {
-  const ChangePasswordForm({Key? key}) : super(key: key);
+class ChangePasswordPage extends StatefulWidget {
+  static String routeName = 'change_password';
+  const ChangePasswordPage({Key? key}) : super(key: key);
 
   @override
-  _ChangePasswordFormState createState() => _ChangePasswordFormState();
+  _ChangePasswordPageState createState() => _ChangePasswordPageState();
 }
 
-class _ChangePasswordFormState extends State<ChangePasswordForm> {
+class _ChangePasswordPageState extends State<ChangePasswordPage> {
   final _formKey = GlobalKey<FormState>();
   String password = "";
   String confirmPass = "";
@@ -37,34 +38,58 @@ class _ChangePasswordFormState extends State<ChangePasswordForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Column(
-        children: [
-          buildPasswordField(),
-          FormError(listError: listErrorPass),
-          const SizedBox(
-            height: 10,
-          ),
-          buildConfirmField(),
-          FormError(listError: listErrorConfirm),
-          const SizedBox(
-            height: 10,
-          ),
-          MainButton(
-            text: "THAY ĐỔI MẬT KHẨU",
-            onpress: () {
-              if (_formKey.currentState == null) {
-                print("_formKey.currentState is null!");
-              } else if (_formKey.currentState!.validate()) {
-                _formKey.currentState!.save();
-                if (listErrorPass.length == 1 && listErrorConfirm.length == 1) {
-                  print("VALID");
-                }
-              }
-            },
-          ),
-        ],
+    Size size = MediaQuery.of(context).size;
+    return Scaffold(
+      resizeToAvoidBottomInset: true,
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              width: size.width,
+              height: size.height * 0.45,
+              decoration: const BoxDecoration(
+                  color: Colors.white,
+                  image: DecorationImage(
+                      image: AssetImage("assets/images/playtogetherlogo.png"),
+                      fit: BoxFit.cover)),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    buildPasswordField(),
+                    FormError(listError: listErrorPass),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    buildConfirmField(),
+                    FormError(listError: listErrorConfirm),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    MainButton(
+                      text: "THAY ĐỔI MẬT KHẨU",
+                      onpress: () {
+                        if (_formKey.currentState == null) {
+                          print("_formKey.currentState is null!");
+                        } else if (_formKey.currentState!.validate()) {
+                          _formKey.currentState!.save();
+                          if (listErrorPass.length == 1 &&
+                              listErrorConfirm.length == 1) {
+                            print("VALID");
+                          }
+                        }
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
